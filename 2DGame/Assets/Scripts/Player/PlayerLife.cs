@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement;
 public class PlayerLife : MonoBehaviour
 {
 
-    Animator anim;
-    Rigidbody2D player;
-    
+    private Animator anim;
+    private Rigidbody2D player;
+    [SerializeField] private float HP = 100;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,8 +26,15 @@ public class PlayerLife : MonoBehaviour
         }
     }
 
-    
-    public void Die()
+    public void GetHurt(float strenght)
+    {
+        HP -= strenght;
+        if(HP<=.1f)
+        {
+            Die();
+        }
+    }
+    private void Die()
     {
         anim.SetTrigger("Death");
         player.bodyType = RigidbodyType2D.Static;

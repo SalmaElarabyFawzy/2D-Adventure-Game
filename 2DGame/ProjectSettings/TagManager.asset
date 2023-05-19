@@ -16,6 +16,7 @@ TagManager:
   - 6
   - 7
   - 8
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -56,7 +57,10 @@ TagManager:
   - name: Terrain
     uniqueID: 939083831
     locked: 0
-  - name: Player
+  - name: Platforms
+    uniqueID: 599614087
+    locked: 0
+  - name: PlayerOrMonsters
     uniqueID: 1054180469
     locked: 0
   - name: Default
