@@ -7,13 +7,13 @@ public class PlayerLife : MonoBehaviour
 
     private Animator anim;
     private Rigidbody2D player;
-    [SerializeField] private float HP = 100;
-    // Start is called before the first frame update
+    private PlayerManager manager;
+
     void Start()
     {
         anim = GetComponent<Animator>();
         player = GetComponent<Rigidbody2D>();
-      
+        manager = GetComponent<PlayerManager>();
     }
    
 
@@ -28,8 +28,8 @@ public class PlayerLife : MonoBehaviour
 
     public void GetHurt(float strenght)
     {
-        HP -= strenght;
-        if(HP<=.1f)
+        manager.HP -= strenght;
+        if(manager.HP<=.1f)
         {
             Die();
         }

@@ -6,18 +6,16 @@ public class SimpleAiManager : MonoBehaviour
 {
 
     private EnemyManager enemy;
-
-
-    [Header("Animation Info")]
-    private Animator anim;
-    private enum State { idle , patrol , follow , attack };
+    private AnimationContrlle animator;
+    private enum State { idle , patrol=1 , follow , attack , hurt };
     private State _state;
 
     void Start()
     {
         enemy  = GetComponent<EnemyManager>();
         _state = State.patrol;
-        anim = GetComponent<Animator>();
+        animator = GetComponent<AnimationContrlle>();
+       
     }
 
     void Update()
@@ -45,9 +43,10 @@ public class SimpleAiManager : MonoBehaviour
         else
         {
             _state = State.patrol;
+            
         }
-
-        anim.SetInteger("state",(int)_state);
+        // animator.Anim.SetInteger("state" ,(int) _state);
+         animator.Anim.Play(animator.AnimationNames((int)_state));
     }
 
 }

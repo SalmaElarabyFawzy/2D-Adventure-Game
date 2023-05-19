@@ -13,8 +13,7 @@ public class PlayerAnimation : MonoBehaviour
     
     private enum MovementState { idle , running ,jumping, falling ,attack , hurt}
    
-    public AudioSource Run_Audio;
-    public AudioSource jumpSound;
+    
     
     // Start is called before the first frame update
     void Start()
@@ -39,18 +38,18 @@ public class PlayerAnimation : MonoBehaviour
         {
             state = MovementState.running;
             sprite.flipX = false;
-            Run_Audio.enabled = true;
+            player.Run_Audio.enabled = true;
         }
         else if(player.Dirx < 0 && player.checkground())
         {
             state = MovementState.running;
             sprite.flipX = true;
-            Run_Audio.enabled = true;
+           player.Run_Audio.enabled = true;
         }
         else
         {
             state = MovementState.idle;
-            Run_Audio.enabled = false;
+           player.Run_Audio.enabled = false;
         }
         if(player.Attack)
         {

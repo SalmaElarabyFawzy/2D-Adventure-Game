@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class PlayerManager : MonoBehaviour
 {
     [Header("Player Settings")]
+    [SerializeField] private float hp = 100;
     [SerializeField] private float jumpHeight = 5f;
     [SerializeField] private float speed = 5f;
     public LayerMask ground;
@@ -14,11 +15,19 @@ public class PlayerManager : MonoBehaviour
 
     [Header("Attack Settings")]
     [SerializeField] private Transform attackpoint;
-    [SerializeField] private float AttackRange = .5f;
+    [SerializeField] private float attackRange = .5f;
     [SerializeField] private float attackStrenght = 3f;
     private bool attack;
 
 
+    [Header("Audio")]
+    [SerializeField] private AudioSource collectionSound;
+    [SerializeField] private AudioSource run_Audio;
+    [SerializeField] private AudioSource jumpSound;
+
+
+    [Header("Text")]
+    [SerializeField] private Text kiwiScore;
 
     void Start()
     {
@@ -41,21 +50,44 @@ public class PlayerManager : MonoBehaviour
     {
         get { return Rb; }
     }
-    public float Dirx
-    { get { return dirx; } }
-
     public BoxCollider2D Boxcolid
     {
         get { return boxcolid; }
     }
+    public float Dirx
+    { get { return dirx; } }
+
     public float JumpHeight
     {
         get { return jumpHeight; }
     }
 
+    public AudioSource CollectionSound
+    {
+        get { return collectionSound; }
+    }
+    public AudioSource Run_Audio
+    {
+        get { return run_Audio; }
+    }
+    public AudioSource JumpSound
+    {
+        get { return jumpSound; }
+    }
 
-
-  
+    public Text KiwiScore
+    {
+        get { return kiwiScore; }
+    }
+    public float HP
+    {
+        get { return hp; }
+        set { hp = value; }
+    }
+    public float AttackRange
+    {
+        get { return attackRange; } 
+    }
     void Update()
     {
         GetInput();
