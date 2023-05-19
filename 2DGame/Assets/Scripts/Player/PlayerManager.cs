@@ -20,6 +20,9 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private Transform attackpoint;
     [SerializeField] private float attackRange = .5f;
     [SerializeField] private float attackStrenght = 3f;
+
+
+
     private bool attack;
 
 

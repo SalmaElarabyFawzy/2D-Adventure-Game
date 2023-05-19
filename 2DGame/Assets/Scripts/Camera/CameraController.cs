@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-
+   
     [SerializeField] private Transform player;
     [SerializeField] private Transform leftBound;
     [SerializeField] private Transform rightBound;
@@ -16,6 +16,7 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         camHight = Camera.main.orthographicSize * 2;
         camWidth = camHight / Camera.main.aspect;
         LeftBound = leftBound.position.x + (camWidth/2);
@@ -25,6 +26,6 @@ public class CameraController : MonoBehaviour
     {
        
         float pos = Mathf.Max(LeftBound , Mathf.Min(player.position.x , RightBound));
-        transform.position = new Vector3(pos , transform.position.y , transform.position.z);
+        transform.position = new Vector3(pos , (player.position.y/3) , transform.position.z);
     }
 }

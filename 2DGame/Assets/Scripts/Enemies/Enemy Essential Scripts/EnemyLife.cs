@@ -16,20 +16,19 @@ public class EnemyLife : MonoBehaviour
         ai = GetComponent<SimpleAiManager>();
     }
 
-
-
-
     public void GetHurt(float strength)
     {
         manager.Health -= strength;
         if(manager.Health <= .1f)
         {
-            Die();
+           StartCoroutine( Die());
         }
     }
 
-    private void Die()
+    private IEnumerator Die()
     {
-        Destroy(gameObject);
+        animation.Anim.SetTrigger("Dead");
+        yield return new WaitForSeconds(2f);
+        gameObject.SetActive(false);
     }
 }

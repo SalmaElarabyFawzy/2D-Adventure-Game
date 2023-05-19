@@ -14,7 +14,7 @@ public class FlightEyeIdle : StateMachineBehaviour
    
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-       // animator.gameObject.transform.position = Vector2.MoveTowards(animator.gameObject.transform.position, eye.SetPosition, speed*Time.deltaTime);
+
     }
 
     
