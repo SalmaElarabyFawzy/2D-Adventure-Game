@@ -7,7 +7,7 @@ public class SimpleAiManager : MonoBehaviour
 
     private EnemyManager enemy;
     private AnimationContrlle animator;
-    private enum State { idle , patrol=1 , follow , attack , hurt };
+    public  enum State { idle , patrol , follow , attack , hurt };
     private State _state;
 
     void Start()
@@ -45,8 +45,8 @@ public class SimpleAiManager : MonoBehaviour
             _state = State.patrol;
             
         }
-        // animator.Anim.SetInteger("state" ,(int) _state);
-         animator.Anim.Play(animator.AnimationNames((int)_state));
+         animator.Anim.SetInteger("state" ,(int) _state);
+        // animator.Anim.Play(animator.AnimationNames((int)_state));
     }
 
 }

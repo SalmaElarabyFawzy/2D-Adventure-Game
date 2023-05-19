@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 public class PlayerManager : MonoBehaviour
 {
+    [Header("Enemy Info")]
+    public LayerMask enemy;
+
     [Header("Player Settings")]
     [SerializeField] private float hp = 100;
     [SerializeField] private float jumpHeight = 5f;
@@ -88,13 +91,15 @@ public class PlayerManager : MonoBehaviour
     {
         get { return attackRange; } 
     }
+    public float AttackStrenght
+    {
+        get { return attackStrenght; }
+    }
     void Update()
     {
         GetInput();
 
     }
-
-
 
 
     private void GetInput()
@@ -109,15 +114,10 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-
-
     public bool checkground()
     {
         return Physics2D.BoxCast(boxcolid.bounds.center, boxcolid.bounds.size, 0, Vector2.down, .1f, ground);
     }
-
-
-
 
     private void OnDrawGizmos()
     {

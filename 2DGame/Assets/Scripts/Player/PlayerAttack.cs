@@ -6,20 +6,27 @@ public class PlayerAttack : StateMachineBehaviour
 {
 
     private PlayerManager manager;
-    private Collider2D[] enemies;
-    
+    private bool attack;
+    private Vector2 attack_point;
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-       manager = animator.GetComponent<PlayerManager>();    
+       manager = animator.GetComponent<PlayerManager>();
+        attack_point = new Vector2(manager.AttackPoint.position.x, manager.AttackPoint.position.y);
+        attack = true;
     }
 
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        enemies = Physics2D.OverlapCircleAll(manager.AttackPoint.position, manager.AttackRange);
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(attack_point, manager.AttackRange,manager.enemy);
         foreach(Collider2D colider in enemies) 
         {
+            if(attack && colider!=null)
+            {
+               colider.GetComponent<EnemyLife>().GetHurt(manager.AttackStrenght);
+                attack = false; 
 
+            }
         }
     }
 
@@ -28,18 +35,5 @@ public class PlayerAttack : StateMachineBehaviour
     {
 
     }
-
-    // OnStateMove is called right after Animator.OnAnimatorMove()
-    //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that processes and affects root motion
-    //}
-
-    // OnStateIK is called right after Animator.OnAnimatorIK()
-    //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that sets up animation IK (inverse kinematics)
-    //}
-
 
 }

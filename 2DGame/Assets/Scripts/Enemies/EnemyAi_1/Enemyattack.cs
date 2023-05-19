@@ -20,11 +20,11 @@ public class Enemyattack : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
        
-        Collider2D palyer = Physics2D.OverlapCircle(attack_point, golbin.AttackRange, _player);
-        if (palyer != null && attack)
+        Collider2D player = Physics2D.OverlapCircle(attack_point, golbin.AttackRange, _player);
+        if (player != null && attack)
         {
-            Debug.Log("Attack");
-            golbin.Attack();
+            
+            player.GetComponent<PlayerLife>().GetHurt(golbin.AttackStrength);
             attack = false;
         }
     }
