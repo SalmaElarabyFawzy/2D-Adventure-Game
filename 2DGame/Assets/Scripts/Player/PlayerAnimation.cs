@@ -7,7 +7,7 @@ public class PlayerAnimation : MonoBehaviour
 {
 
     private PlayerManager player;
-    private  SpriteRenderer sprite;
+   
    
     private Animator anim;
     
@@ -21,7 +21,7 @@ public class PlayerAnimation : MonoBehaviour
    
         anim =GetComponent<Animator>(); 
         player = GetComponent<PlayerManager>();
-        sprite = GetComponent<SpriteRenderer>();
+    
     }
 
     // Update is called once per frame
@@ -37,14 +37,14 @@ public class PlayerAnimation : MonoBehaviour
         if (player.Dirx>0 && player.checkground())
         {
             state = MovementState.running;
-            sprite.flipX = false;
+            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
             player.Run_Audio.enabled = true;
         }
         else if(player.Dirx < 0 && player.checkground())
         {
             state = MovementState.running;
-            sprite.flipX = true;
-           player.Run_Audio.enabled = true;
+            transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+            player.Run_Audio.enabled = true;
         }
         else
         {

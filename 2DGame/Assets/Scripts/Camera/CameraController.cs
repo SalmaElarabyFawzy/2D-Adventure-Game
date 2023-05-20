@@ -8,8 +8,8 @@ public class CameraController : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] private Transform leftBound;
     [SerializeField] private Transform rightBound;
-
-
+    [SerializeField] private float offset =1;
+    [SerializeField] private float FollowSpeed =2f ;
     [SerializeField]
     private float camWidth, camHight;
     private float LeftBound , RightBound ;  
@@ -26,6 +26,7 @@ public class CameraController : MonoBehaviour
     {
        
         float pos = Mathf.Max(LeftBound , Mathf.Min(player.position.x , RightBound));
-        transform.position = new Vector3(pos , (player.position.y/3) , transform.position.z);
+        Vector3 position = new Vector3(pos ,player.position.y + offset , transform.position.z);
+        transform.position = Vector3.Slerp(transform.position, position, FollowSpeed*Time.deltaTime);
     }
 }
