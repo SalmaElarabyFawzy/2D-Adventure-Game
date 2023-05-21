@@ -9,13 +9,17 @@ public class PlayerLife : MonoBehaviour
     private Rigidbody2D player;
     private PlayerManager manager;
 
+
+
     void Start()
     {
-        anim = GetComponent<Animator>();
-        player = GetComponent<Rigidbody2D>();
         manager = GetComponent<PlayerManager>();
+        anim = manager.Animator;
+        player = manager.RB;
     }
    
+
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -25,6 +29,7 @@ public class PlayerLife : MonoBehaviour
             Die();
         }
     }
+
 
     public void GetHurt(float strenght)
     {

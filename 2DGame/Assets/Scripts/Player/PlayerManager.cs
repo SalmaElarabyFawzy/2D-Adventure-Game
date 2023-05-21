@@ -5,25 +5,28 @@ using UnityEngine.UI;
 public class PlayerManager : MonoBehaviour
 {
     [Header("Enemy Info")]
-    public LayerMask enemy;
+    [SerializeField] private LayerMask enemy;
+
+
+
 
     [Header("Player Settings")]
     [SerializeField] private float hp = 100;
     [SerializeField] private float jumpHeight = 5f;
     [SerializeField] private float speed = 5f;
-    public LayerMask ground;
+    [SerializeField] private LayerMask ground;
     private Rigidbody2D Rb;
     private BoxCollider2D boxcolid;
-    private float dirx;
+    
+
+
+
 
     [Header("Attack Settings")]
     [SerializeField] private Transform attackpoint;
     [SerializeField] private float attackRange = .5f;
     [SerializeField] private float attackStrenght = 3f;
-
-
-
-    private bool attack;
+    
 
 
     [Header("Audio")]
@@ -35,19 +38,26 @@ public class PlayerManager : MonoBehaviour
     [Header("Text")]
     [SerializeField] private Text kiwiScore;
 
-    void Start()
+
+
+    [Header("Animation")]
+    private Animator anim;
+
+
+    void Awake()
     {
         Rb = GetComponent<Rigidbody2D>();
         boxcolid = GetComponent<BoxCollider2D>();
         attackpoint = transform.GetChild(0);
+        anim = GetComponent<Animator>();
     }
 
 
-
-    public bool Attack
+    public Animator Animator
     {
-        get { return attack; }
+        get { return anim; }
     }
+   
     public Transform AttackPoint
     {
         get { return attackpoint; } 
@@ -60,8 +70,7 @@ public class PlayerManager : MonoBehaviour
     {
         get { return boxcolid; }
     }
-    public float Dirx
-    { get { return dirx; } }
+   
 
     public float JumpHeight
     {
@@ -98,29 +107,24 @@ public class PlayerManager : MonoBehaviour
     {
         get { return attackStrenght; }
     }
+    public float Speed
+    {
+        get { return speed; }
+    }
+    public LayerMask Ground
+    {
+        get { return ground; }
+    }
+    public LayerMask Enemy
+    {
+        get { return enemy; }
+    }
     void Update()
     {
-        GetInput();
+  
 
     }
 
-
-    private void GetInput()
-    {
-        dirx = Input.GetAxis("Horizontal");
-
-        Rb.velocity = new Vector2(dirx * speed, Rb.velocity.y);
-        attack = Input.GetKeyDown(KeyCode.C);
-        if (Input.GetKeyDown(KeyCode.Space) && checkground())
-        {
-            Rb.velocity = new Vector2(Rb.velocity.x, jumpHeight);
-        }
-    }
-
-    public bool checkground()
-    {
-        return Physics2D.BoxCast(boxcolid.bounds.center, boxcolid.bounds.size, 0, Vector2.down, .1f, ground);
-    }
 
     private void OnDrawGizmos()
     {

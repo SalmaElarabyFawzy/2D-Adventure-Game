@@ -6,10 +6,13 @@ public class Collect : MonoBehaviour
 {
     private PlayerManager player;
     private int KiwiCounter = 0;
-
-    private void Start()
+    private AudioSource CollectSound;
+    private Text KiwiScore;
+    private void Awake()
     {
         player = GetComponent<PlayerManager>();
+        CollectSound = player.CollectionSound;
+        KiwiScore = player.KiwiScore;
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -18,8 +21,8 @@ public class Collect : MonoBehaviour
            
             Destroy(other.gameObject);
             KiwiCounter++;
-            player.KiwiScore.text = ("KIWI : " + KiwiCounter).ToString();
-            player.CollectionSound.Play();
+            KiwiScore.text = ("KIWI : " + KiwiCounter).ToString();
+            CollectSound.Play();
         }
     }
 }

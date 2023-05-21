@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEditorInternal;
 using UnityEngine;
 
@@ -7,21 +8,24 @@ public class PlayerAnimation : MonoBehaviour
 {
 
     private PlayerManager player;
-   
-   
     private Animator anim;
-    
+    private PlayerInput input;
+    private bool attack;
+    private bool checkground;
+    private float Dirx;
     private enum MovementState { idle , running ,jumping, falling ,attack , hurt}
    
     
     
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-   
-        anim =GetComponent<Animator>(); 
         player = GetComponent<PlayerManager>();
-    
+        input = GetComponent<PlayerInput>();
+        anim = player.Animator;
+        attack = input.Attack;
+        checkground = input.checkground();
+        Dirx = input.Dirx;
     }
 
     // Update is called once per frame
@@ -34,13 +38,13 @@ public class PlayerAnimation : MonoBehaviour
     void updateAnimation()
     {
         MovementState state ;
-        if (player.Dirx>0 && player.checkground())
+        if (Dirx>0 && checkground)
         {
             state = MovementState.running;
             transform.rotation = Quaternion.Euler(0f, 0f, 0f);
             player.Run_Audio.enabled = true;
         }
-        else if(player.Dirx < 0 && player.checkground())
+        else if(Dirx < 0 && checkground)
         {
             state = MovementState.running;
             transform.rotation = Quaternion.Euler(0f, 180f, 0f);
@@ -51,7 +55,7 @@ public class PlayerAnimation : MonoBehaviour
             state = MovementState.idle;
            player.Run_Audio.enabled = false;
         }
-        if(player.Attack)
+        if(attack)
         {
             state = MovementState.attack;
         }
